@@ -1,8 +1,7 @@
 module "aws_oidc_gitlab" {
 
   for_each = var.gitlab
-  source   = "github.com/abhiyerra/terraform-aws-oidc-gitlab"
-
+  source = "github.com/opszero/terraform-aws-oidc-gitlab?ref=v1.0.0"
 
   attach_admin_policy  = false
   create_oidc_provider = true

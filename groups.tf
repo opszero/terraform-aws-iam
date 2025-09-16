@@ -1,8 +1,7 @@
 module "iam_group_with_policies" {
   for_each = var.groups
 
-  source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-  version = "~> 6"
+  source  = "./iam-group-with-policies"
 
   name = each.key
 

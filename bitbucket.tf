@@ -1,7 +1,7 @@
 module "bitbucket" {
   for_each = var.bitbucket
 
-  source = "github.com/opszero/terraform-aws-bitbucket-oidc"
+  source = "github.com/opszero/terraform-aws-bitbucket-oidc?ref=v1.0.0"
 
   workspace_name = each.value.workspace_name
   workspace_uuid = each.value.workspace_uuid
