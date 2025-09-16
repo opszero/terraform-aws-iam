@@ -53,14 +53,14 @@ resource "aws_iam_policy" "deployer" {
 EOT
 }
 
-module "opszero-eks" {
-  source = "github.com/opszero/terraform-aws-mrmgr"
+module "opszero-iam" {
+  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
 
   github = {
     "deployer" = {
       org = "opszero"
       repos = [
-        "terraform-aws-mrmgr"
+        "terraform-aws-iam"
       ]
       policy_arns = [
         aws_iam_policy.deployer.arn
@@ -94,7 +94,7 @@ module "opszero-eks" {
 # environments/<nameofenv>/main.tf
 
 module "opszero-eks" {
-  source = "github.com/opszero/terraform-aws-kubespot"
+  source = "github.com/opszero/terraform-aws-kubespot?ref=v10.1.1"
 
   ...
 
@@ -181,13 +181,13 @@ EOT
 }
 
 module "iam" {
-  source = "github.com/opszero/mrmgr//modules/aws"
+  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
 
   github = {
     "deployer" = {
       org = "opszero"
       repos = [
-        "mrmgr"
+        "iam"
       ]
       policy_arns = [
         aws_iam_policy.deployer.arn
@@ -202,7 +202,7 @@ kubespot
 
 ```terraform
 module "opszero-eks" {
-  source = "github.com/opszero/terraform-aws-kubespot"
+  source = "github.com/opszero/terraform-aws-kubespot?ref=v10.1.1"
 
   ...
 
@@ -309,7 +309,7 @@ EOT
 }
 
 module "iam" {
-  source = "github.com/opszero/mrmgr//modules/aws"
+  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
 
   gitlab = {
     "deployer" = {
@@ -318,7 +318,7 @@ module "iam" {
       gitlab_url    = "https://gitlab.com"
       match_field   = "sub"
       match_value = [
-        "project_path:opszero/mrmgr:ref_type:branch:ref:main"
+        "project_path:opszero/iam:ref_type:branch:ref:main"
       ]
       policy_arns = [
         aws_iam_policy.deployer.arn
@@ -366,8 +366,8 @@ assume role:
 ## BitBucket
 
 ```bash
-module "mrmgr" {
-  source = "github.com/opszero/terraform-aws-mrmgr"
+module "iam" {
+  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
 
   bitbucket = {
     "deployer" = {
