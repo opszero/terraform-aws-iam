@@ -53,14 +53,14 @@ resource "aws_iam_policy" "deployer" {
 EOT
 }
 
-module "opszero-iam" {
-  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
+module "opszero-eks" {
+  source = "github.com/opszero/terraform-aws-mrmgr"
 
   github = {
     "deployer" = {
       org = "opszero"
       repos = [
-        "terraform-aws-iam"
+        "terraform-aws-mrmgr"
       ]
       policy_arns = [
         aws_iam_policy.deployer.arn
@@ -94,7 +94,7 @@ module "opszero-iam" {
 # environments/<nameofenv>/main.tf
 
 module "opszero-eks" {
-  source = "github.com/opszero/terraform-aws-kubespot?ref=v10.1.1"
+  source = "github.com/opszero/terraform-aws-kubespot"
 
   ...
 
@@ -181,13 +181,13 @@ EOT
 }
 
 module "iam" {
-  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
+  source = "github.com/opszero/mrmgr//modules/aws"
 
   github = {
     "deployer" = {
       org = "opszero"
       repos = [
-        "iam"
+        "mrmgr"
       ]
       policy_arns = [
         aws_iam_policy.deployer.arn
@@ -202,7 +202,7 @@ kubespot
 
 ```terraform
 module "opszero-eks" {
-  source = "github.com/opszero/terraform-aws-kubespot?ref=v10.1.1"
+  source = "github.com/opszero/terraform-aws-kubespot"
 
   ...
 
@@ -278,7 +278,6 @@ jobs:
 Example configuration for deploying to AWS without the need for AWS
 Access Keys. To list EKS cluster via GitLab Pipelines without using AWS credentials. You can also attach other policies to this IAM role.
 
-
 ```bash
 resource "aws_iam_policy" "deployer" {
   name        = "gitlab-deployer-policy"
@@ -309,7 +308,7 @@ EOT
 }
 
 module "iam" {
-  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
+  source = "github.com/opszero/mrmgr//modules/aws"
 
   gitlab = {
     "deployer" = {
@@ -318,7 +317,7 @@ module "iam" {
       gitlab_url    = "https://gitlab.com"
       match_field   = "sub"
       match_value = [
-        "project_path:opszero/iam:ref_type:branch:ref:main"
+        "project_path:opszero/mrmgr:ref_type:branch:ref:main"
       ]
       policy_arns = [
         aws_iam_policy.deployer.arn
@@ -366,8 +365,8 @@ assume role:
 ## BitBucket
 
 ```bash
-module "iam" {
-  source = "github.com/opszero/terraform-aws-iam?ref=v4.0.0"
+module "mrmgr" {
+  source = "github.com/opszero/terraform-aws-mrmgr"
 
   bitbucket = {
     "deployer" = {
