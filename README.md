@@ -278,6 +278,7 @@ jobs:
 Example configuration for deploying to AWS without the need for AWS
 Access Keys. To list EKS cluster via GitLab Pipelines without using AWS credentials. You can also attach other policies to this IAM role.
 
+
 ```bash
 resource "aws_iam_policy" "deployer" {
   name        = "gitlab-deployer-policy"
