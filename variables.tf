@@ -108,5 +108,5 @@ variable "enable_mfa" {
 variable "enable_user_group_membership" {
   description = "Set to true to use aws_iam_user_group_membership for import support"
   type        = bool
-  default     = true
+  default     = false
 }
