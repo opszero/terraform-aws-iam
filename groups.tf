@@ -3,6 +3,8 @@ module "iam_group_with_policies" {
 
   source  = "./iam-group-with-policies"
 
+  enable_user_group_membership  = var.enable_user_group_membership
+
   name = each.key
 
   group_users = [
