@@ -5,6 +5,7 @@ locals {
 }
 
 resource "aws_iam_policy" "mfa" {
+  count = var.enable_mfa ? 1 : 0
   name        = "MFAPolicy"
   path        = "/"
   description = "Policy ensures users are utilizing MFA"

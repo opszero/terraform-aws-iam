@@ -10,11 +10,19 @@ resource "aws_iam_group" "this" {
 }
 
 resource "aws_iam_group_membership" "this" {
-  count = length(var.group_users) > 0 ? 1 : 0
+  count = (length(var.group_users) > 0 && !var.enable_user_group_membership) ? 1 : 0
 
   group = local.group_name
   name  = var.name
   users = var.group_users
+}
+
+
+resource "aws_iam_user_group_membership" "this" {
+  count = (length(var.group_users) > 0 && var.enable_user_group_membership) ? length(var.group_users) : 0
+
+  user   = var.group_users[count.index]
+  groups = [local.group_name]
 }
 
 ################################

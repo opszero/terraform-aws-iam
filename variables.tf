@@ -96,3 +96,11 @@ variable "vanta_external_id" {
   description = "Vanta external id"
   default     = ""
 }
+
+
+variable "enable_mfa" {
+  description = "Whether to enable MFA for IAM users"
+  type        = bool
+  default     = true
+}
+
